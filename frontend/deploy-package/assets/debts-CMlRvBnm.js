@@ -1,0 +1,1 @@
+import{t as e}from"./client-KRAf3qJL.js";var t={my:async()=>{try{return await e.get(`/debts/my/`)}catch(e){if(e?.response?.status===404)return{data:null,status:404,statusText:`Not Found`,headers:e.response?.headers,config:e.config};throw e}}};export{t};

@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CdArH33I.js";import{n as t}from"./index-BT11cw32.js";import{t as n}from"./CustodianDashboard-xilDYlWS.js";import{t as r}from"./SecretaryDashboard-DMDI374k.js";var i=e();function a(){let{user:e}=t();return e?.role===`custodian`?(0,i.jsx)(n,{}):(0,i.jsx)(r,{})}export{a as component};

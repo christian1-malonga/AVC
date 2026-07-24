@@ -1,0 +1,14 @@
+node_modules
+dist
+.output
+.tanstack
+.nitro
+.wrangler
+.netlify
+*.local
+db.sqlite3
+__pycache__
+*.pyc
+.env
+.venv
+.vscode

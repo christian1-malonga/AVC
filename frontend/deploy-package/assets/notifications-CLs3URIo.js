@@ -1,0 +1,1 @@
+import{t as e}from"./client-KRAf3qJL.js";var t={list:()=>e.get(`/notifications/`),markRead:t=>e.post(`/notifications/${t}/read/`)};export{t};

@@ -1,0 +1,1 @@
+import{t as e}from"./PresidentDashboard-G1pV2k5o.js";var t=e;export{t as component};

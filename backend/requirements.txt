@@ -9,3 +9,6 @@ PyPDF2
 python-docx
 django-filter
 whitenoise
+gunicorn
+dj-database-url
+psycopg2-binary

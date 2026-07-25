@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from .views import (
     RegisterView,
     LoginView,
@@ -17,18 +17,18 @@ from .views import (
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
-    path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(), name='login'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('me/', MeView.as_view(), name='me'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('section/', SelectSectionView.as_view(), name='section'),
-    path('profile/', UserProfileView.as_view(), name='profile'),
-    path('approvals/pending/', PendingApprovalsView.as_view(), name='pending_approvals'),
-    path('approvals/<int:pk>/approve/', ApproveUserView.as_view(), name='approve_user'),
-    path('approvals/<int:pk>/reject/', RejectUserView.as_view(), name='reject_user'),
-    path('roles/', RoleListView.as_view(), name='role_list'),
-    path('users/', UserListView.as_view(), name='user_list'),
-    path('users/<int:pk>/role/', UpdateUserRoleView.as_view(), name='update_user_role'),
-    path('users/<int:pk>/', DeleteUserView.as_view(), name='delete_user'),
+    re_path(r'register/?$', RegisterView.as_view(), name='register'),
+    re_path(r'login/?$', LoginView.as_view(), name='login'),
+    re_path(r'token/refresh/?$', TokenRefreshView.as_view(), name='token_refresh'),
+    re_path(r'me/?$', MeView.as_view(), name='me'),
+    re_path(r'logout/?$', LogoutView.as_view(), name='logout'),
+    re_path(r'section/?$', SelectSectionView.as_view(), name='section'),
+    re_path(r'profile/?$', UserProfileView.as_view(), name='profile'),
+    re_path(r'approvals/pending/?$', PendingApprovalsView.as_view(), name='pending_approvals'),
+    re_path(r'approvals/(?P<pk>\d+)/approve/?$', ApproveUserView.as_view(), name='approve_user'),
+    re_path(r'approvals/(?P<pk>\d+)/reject/?$', RejectUserView.as_view(), name='reject_user'),
+    re_path(r'roles/?$', RoleListView.as_view(), name='role_list'),
+    re_path(r'users/?$', UserListView.as_view(), name='user_list'),
+    re_path(r'users/(?P<pk>\d+)/role/?$', UpdateUserRoleView.as_view(), name='update_user_role'),
+    re_path(r'users/(?P<pk>\d+)/?$', DeleteUserView.as_view(), name='delete_user'),
 ]

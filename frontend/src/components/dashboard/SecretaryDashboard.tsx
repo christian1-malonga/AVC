@@ -229,8 +229,8 @@ export function SecretaryDashboard() {
         <CardHeader>
           <CardTitle className="text-base">Upload history</CardTitle>
         </CardHeader>
-        <CardContent>
-          <Table className="min-w-[600px]">
+        <CardContent className="overflow-x-auto">
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Title</TableHead>

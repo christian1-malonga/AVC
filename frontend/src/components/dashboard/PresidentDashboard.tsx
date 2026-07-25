@@ -219,8 +219,8 @@ export function PresidentDashboard() {
             <CardTitle className="text-base">Pending Registrations</CardTitle>
             <Badge variant="secondary">{pendingUsers.length} Pending</Badge>
           </CardHeader>
-          <CardContent>
-            <Table className="min-w-[600px]">
+          <CardContent className="overflow-x-auto">
+            <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>Name</TableHead>

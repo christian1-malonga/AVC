@@ -153,27 +153,29 @@ export function PresidentDashboard() {
             Approve members, review activity, and manage resources.
           </p>
         </div>
-        <div className="flex w-full flex-wrap gap-2 sm:w-auto">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
           <Button
             size="sm"
-            className="bg-gradient-primary text-primary-foreground"
+            className="bg-gradient-primary text-primary-foreground w-full sm:w-auto"
             onClick={() => setAnnouncementDialogOpen(true)}
           >
-            <Megaphone className="mr-2 h-4 w-4" /> Post Announcement
+            <Megaphone className="mr-2 h-4 w-4 shrink-0" /> <span>Announcement</span>
           </Button>
           <Button
             size="sm"
             variant="outline"
+            className="w-full sm:w-auto"
             onClick={() => navigate({ to: "/uploads" })}
           >
-            <Upload className="mr-2 h-4 w-4" /> Upload Document / Music
+            <Upload className="mr-2 h-4 w-4 shrink-0" /> <span>Upload</span>
           </Button>
           <Button
             size="sm"
             variant="outline"
+            className="w-full sm:w-auto"
             onClick={() => navigate({ to: "/members" })}
           >
-            <Users className="mr-2 h-4 w-4" /> Manage Members
+            <Users className="mr-2 h-4 w-4 shrink-0" /> <span>Members</span>
           </Button>
         </div>
       </motion.div>
@@ -225,36 +227,38 @@ export function PresidentDashboard() {
                 <TableRow>
                   <TableHead>Name</TableHead>
                   <TableHead>Email</TableHead>
-                  <TableHead>Phone</TableHead>
-                  <TableHead>Submitted</TableHead>
+                  <TableHead className="hidden sm:table-cell">Phone</TableHead>
+                  <TableHead className="hidden sm:table-cell">Submitted</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {pendingUsers.map((u) => (
                   <TableRow key={u.id}>
-                    <TableCell className="font-medium">{u.full_name}</TableCell>
-                    <TableCell className="text-muted-foreground">{u.email}</TableCell>
-                    <TableCell className="text-muted-foreground">{u.phone}</TableCell>
-                    <TableCell className="text-muted-foreground">
+                    <TableCell className="font-medium max-w-[120px] truncate sm:max-w-none">{u.full_name}</TableCell>
+                    <TableCell className="text-muted-foreground max-w-[140px] truncate sm:max-w-none">{u.email}</TableCell>
+                    <TableCell className="text-muted-foreground hidden sm:table-cell">{u.phone}</TableCell>
+                    <TableCell className="text-muted-foreground hidden sm:table-cell">
                       {u.date_joined ? new Date(u.date_joined).toLocaleDateString() : "—"}
                     </TableCell>
-                    <TableCell className="text-right space-x-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="whitespace-nowrap"
-                        onClick={() => handleReject(u.id)}
-                      >
-                        Reject
-                      </Button>
-                      <Button
-                        size="sm"
-                        className="whitespace-nowrap bg-emerald-600 text-white hover:bg-emerald-700"
-                        onClick={() => handleApprove(u.id)}
-                      >
-                        Approve
-                      </Button>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-1">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-7 px-2 text-xs"
+                          onClick={() => handleReject(u.id)}
+                        >
+                          Reject
+                        </Button>
+                        <Button
+                          size="sm"
+                          className="h-7 px-2 text-xs bg-emerald-600 text-white hover:bg-emerald-700"
+                          onClick={() => handleApprove(u.id)}
+                        >
+                          Approve
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -67,8 +67,8 @@ export function createMockUser(email: string): AuthUser {
     phone: "08000000000",
     role: "member",
     date_joined: new Date().toISOString(),
-    approved: false,
-    is_approved: false,
+    approved: true,
+    is_approved: true,
   };
 }
 

@@ -92,11 +92,18 @@ function LoginPage() {
           </div>
 
           <div className="mb-8">
-            <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-2">Sign in</p>
-            <h2 className="text-2xl font-semibold tracking-tight">Access your account</h2>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-2">Demo</p>
+            <h2 className="text-2xl font-semibold tracking-tight">Try the demo</h2>
             <p className="text-sm text-muted-foreground mt-2">
-              Use your registered email and password. Access is limited to approved members.
+              Use any email/password to sign in as a member, or try these roles:
             </p>
+            <div className="mt-3 space-y-1 text-xs text-muted-foreground bg-muted p-3 rounded-sm font-mono">
+              <div>president@avc.com / president123</div>
+              <div>secretary@avc.com / secretary123</div>
+              <div>custodian@avc.com / custodian123</div>
+              <div>member@avc.com / member123</div>
+              <div className="text-[10px] text-muted-foreground/60 mt-1">Any other email → Member</div>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">

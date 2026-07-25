@@ -3,16 +3,9 @@
   publish   = "dist"
 
 [build.environment]
-  NITRO_PRESET = "netlify"
   NODE_VERSION = "20"
 
 [[redirects]]
-  from   = "/api/*"
-  to     = "https://avc-8rjs.onrender.com/api/:splat"
-  status = 200
-  force  = true
-
-[[redirects]]
   from   = "/*"
-  to     = "/.netlify/functions/server"
+  to     = "/index.html"
   status = 200

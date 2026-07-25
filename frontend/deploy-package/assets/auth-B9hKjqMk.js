@@ -1,1 +1,0 @@
-import{t as e}from"./client-KRAf3qJL.js";var t={register:t=>e.post(`/auth/register/`,t),login:t=>e.post(`/auth/login/`,t),me:()=>e.get(`/auth/me/`),logout:()=>e.post(`/auth/logout/`),setSection:t=>e.post(`/auth/section/`,{section:t})};export{t};

@@ -29,6 +29,7 @@ import { statsService } from "@/lib/api/services/stats";
 import { membersService } from "@/lib/api/services/members";
 import { notificationsService } from "@/lib/api/services/notifications";
 import { MemberDashboard } from "./MemberDashboard";
+import { DashboardFooter } from "./DashboardFooter";
 import type { AuthUser } from "@/lib/api/services/auth";
 import type { NotificationItem } from "@/lib/api/services/notifications";
 import {
@@ -374,6 +375,7 @@ export function PresidentDashboard() {
           </div>
         </DialogContent>
       </Dialog>
+      <DashboardFooter />
     </div>
   );
 }

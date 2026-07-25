@@ -59,7 +59,7 @@ export const api = {
       return ok({ token: "mock-token-123", user });
     }
     if (url === "/auth/register/") {
-      return ok({ user: { id: String(Date.now()), full_name: `${data.first_name} ${data.last_name}`, email: data.email, phone: data.phone, role: "member", date_joined: new Date().toISOString(), approved: false, is_approved: false } });
+      return ok({ user: { id: String(Date.now()), full_name: `${data.first_name} ${data.last_name}`, email: data.email, phone: data.phone, role: "member", date_joined: new Date().toISOString(), approved: true, is_approved: true } });
     }
     if (url === "/auth/logout/") return ok({});
     if (url === "/auth/section/") return ok({ detail: "Section selected successfully.", section: data?.section });

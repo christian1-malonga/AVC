@@ -6,6 +6,16 @@ function delay(ms = 200): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+function getStoredUser(): AuthUser | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem("avc_user");
+    return raw ? (JSON.parse(raw) as AuthUser) : null;
+  } catch {
+    return null;
+  }
+}
+
 function ok<T>(data: T) {
   return Promise.resolve({ data, status: 200, statusText: "OK", headers: {}, config: {} }) as any;
 }
@@ -13,9 +23,9 @@ function ok<T>(data: T) {
 export const api = {
   get: async (url: string, _config?: any) => {
     await delay();
+    const storedUser = getStoredUser();
     if (url === "/auth/me/") {
-      const raw = localStorage.getItem("avc_user");
-      const user = raw ? (JSON.parse(raw) as AuthUser) : MOCK_MEMBERS[0];
+      const user = storedUser || MOCK_MEMBERS[0];
       return ok(user);
     }
     if (url === "/auth/users/" || url.startsWith("/auth/users?")) return ok(MOCK_MEMBERS);
@@ -23,22 +33,19 @@ export const api = {
     if (url === "/auth/roles/") return ok(MOCK_ROLES);
     if (url === "/analytics/stats/") return ok(MOCK_STATS);
     if (url === "/debts/my/") {
-      const raw = localStorage.getItem("avc_user");
-      const user = raw ? (JSON.parse(raw) as AuthUser) : null;
+      const user = storedUser;
       const debt = user ? getMyDebts(user.email) : MOCK_DEBTS[0];
       if (!debt) return Promise.reject(Object.assign(new Error("Not found"), { response: { status: 404 } }));
       return ok(debt);
     }
     if (url === "/debts/list/") return ok(MOCK_DEBTS);
     if (url === "/choir/attendance/my/") {
-      const raw = localStorage.getItem("avc_user");
-      const user = raw ? (JSON.parse(raw) as AuthUser) : null;
+      const user = storedUser;
       return ok(user ? getMyAttendance(user.email) : getMyAttendance("member@avc.com"));
     }
     if (url === "/choir/attendance/") return ok(MOCK_ATTENDANCE);
     if (url.startsWith("/documents")) return ok(MOCK_DOCUMENTS);
     if (url.startsWith("/music")) {
-      const params = new URLSearchParams(_config?.params);
       let songs = MOCK_SONGS;
       const q = _config?.params?.q;
       const cat = _config?.params?.category;

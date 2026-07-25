@@ -1,11 +1,12 @@
 [build]
-  command   = "npm run build:spa"
+  command   = "npm run build"
   publish   = "dist"
 
 [build.environment]
+  NITRO_PRESET = "netlify"
   NODE_VERSION = "20"
 
 [[redirects]]
   from   = "/*"
-  to     = "/index.spa.html"
+  to     = "/.netlify/functions/server"
   status = 200

@@ -144,8 +144,8 @@ function MembersPage() {
           <CardTitle className="text-base">All members ({filtered.length})</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="rounded-lg border border-border/70 overflow-x-auto">
-            <Table className="min-w-[720px]">
+            <div className="rounded-lg border border-border/70 overflow-x-auto">
+              <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>Name</TableHead>

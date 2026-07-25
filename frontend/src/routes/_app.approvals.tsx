@@ -62,7 +62,7 @@ function ApprovalsPage() {
         <CardHeader>
           <CardTitle className="text-base">Registrations awaiting review</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
@@ -70,7 +70,7 @@ function ApprovalsPage() {
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
                 <TableHead>Submitted</TableHead>
-                <TableHead className="text-right">Action</TableHead>
+                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -79,19 +79,21 @@ function ApprovalsPage() {
                   <TableCell className="font-medium">{u.full_name}</TableCell>
                   <TableCell className="text-muted-foreground">{u.email}</TableCell>
                   <TableCell className="text-muted-foreground">{u.phone}</TableCell>
-                  <TableCell className="text-muted-foreground">{new Date(u.date_joined).toLocaleDateString()}</TableCell>
-                  <TableCell className="text-right space-x-2">
-                    <Button size="sm" variant="outline" disabled={loading} onClick={() => handleReject(u.id, u.full_name)}>
-                      Reject
-                    </Button>
-                    <Button
-                      size="sm"
-                      className="bg-success text-success-foreground hover:bg-success/90"
-                      disabled={loading}
-                      onClick={() => handleApprove(u.id, u.full_name)}
-                    >
-                      Approve
-                    </Button>
+                  <TableCell className="text-muted-foreground whitespace-nowrap">{new Date(u.date_joined).toLocaleDateString()}</TableCell>
+                  <TableCell>
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="outline" disabled={loading} onClick={() => handleReject(u.id, u.full_name)}>
+                        Reject
+                      </Button>
+                      <Button
+                        size="sm"
+                        className="bg-success text-success-foreground hover:bg-success/90"
+                        disabled={loading}
+                        onClick={() => handleApprove(u.id, u.full_name)}
+                      >
+                        Approve
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

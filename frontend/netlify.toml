@@ -1,5 +1,5 @@
 [build]
-  command   = "npm run build"
+  command   = "npm run build:spa"
   publish   = "dist"
 
 [build.environment]
@@ -7,5 +7,5 @@
 
 [[redirects]]
   from   = "/*"
-  to     = "/index.html"
+  to     = "/index.spa.html"
   status = 200

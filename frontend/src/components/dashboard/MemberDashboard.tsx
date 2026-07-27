@@ -17,7 +17,6 @@ import { documentsService, type DocItem } from "@/lib/api/services/documents";
 import { debtService, type Debt } from "@/lib/api/services/debts";
 import { attendanceService, type AttendanceSummary } from "@/lib/api/services/attendance";
 import { toast } from "sonner";
-import { DashboardFooter } from "./DashboardFooter";
 
 export function MemberDashboard() {
   const { user } = useAuth();
@@ -357,7 +356,6 @@ export function MemberDashboard() {
           </CardContent>
         </Card>
       </div>
-      <DashboardFooter />
     </div>
   );
 }

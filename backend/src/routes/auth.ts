@@ -71,21 +71,17 @@ export default async function authRoutes(fastify: FastifyInstance) {
   // POST /auth/login/
   fastify.post<{ Body: LoginBody }>("/auth/login/", async (request, reply) => {
     const { email, password } = request.body;
-    console.log("[DEBUG LOGIN] body:", JSON.stringify(request.body));
-    console.log("[DEBUG LOGIN] email:", email, "password:", password ? "provided" : "missing");
 
     if (!email || !password) {
       return reply.status(400).send({ detail: "Email and password required." });
     }
 
     const row = db.prepare("SELECT * FROM users WHERE email = ?").get(email) as any;
-    console.log("[DEBUG LOGIN] user found:", !!row);
     if (!row) {
       return reply.status(401).send({ detail: "Invalid email or password." });
     }
 
     const valid = await bcrypt.compare(password, row.password_hash);
-    console.log("[DEBUG LOGIN] password valid:", valid);
     if (!valid) {
       return reply.status(401).send({ detail: "Invalid email or password." });
     }

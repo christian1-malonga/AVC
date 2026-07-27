@@ -7,6 +7,14 @@ function getToken(): string | null {
   }
 }
 
+const BASE_URL =
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://localhost:4000"
+    : "";
+
+export { BASE_URL };
+
 function clearAuth() {
   if (typeof window === "undefined") return;
   try {
@@ -36,9 +44,9 @@ async function request<T>(method: string, url: string, data?: any, config?: any)
     body: data ? (isFormData ? data : JSON.stringify(data)) : undefined,
   };
 
-  const response = await fetch(url, options);
+  const response = await fetch(`${BASE_URL}${url}`, options);
 
-  if (response.status === 401 || response.status === 403) {
+  if (response.status === 401) {
     clearAuth();
   }
 

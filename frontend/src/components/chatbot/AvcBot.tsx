@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { BASE_URL } from "@/lib/api/client";
 
 interface ChatMessage {
   id: string;
@@ -28,7 +29,7 @@ async function sendChat(message: string, conversationId: string | null): Promise
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch("/api/chatbot/message/", {
+  const response = await fetch(`${BASE_URL}/api/chatbot/message/`, {
     method: "POST",
     headers,
     body: JSON.stringify({ message, conversation_id: conversationId }),

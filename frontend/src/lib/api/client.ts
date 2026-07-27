@@ -7,6 +7,14 @@ function getToken(): string | null {
   }
 }
 
+function clearAuth() {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.removeItem("avc_token");
+    localStorage.removeItem("avc_user");
+  } catch { /* ignore */ }
+}
+
 async function request<T>(method: string, url: string, data?: any, config?: any): Promise<{ data: T; status: number }> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
@@ -17,7 +25,6 @@ async function request<T>(method: string, url: string, data?: any, config?: any)
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // If data is FormData, let the browser set Content-Type (with boundary)
   const isFormData = data instanceof FormData;
   if (isFormData) {
     delete headers["Content-Type"];
@@ -30,6 +37,10 @@ async function request<T>(method: string, url: string, data?: any, config?: any)
   };
 
   const response = await fetch(url, options);
+
+  if (response.status === 401 || response.status === 403) {
+    clearAuth();
+  }
 
   let body: any;
   const contentType = response.headers.get("content-type") || "";

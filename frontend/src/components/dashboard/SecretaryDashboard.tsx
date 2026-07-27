@@ -28,7 +28,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { DashboardFooter } from "./DashboardFooter";
 import { documentsService, DocItem } from "@/lib/api/services/documents";
 import { membersService } from "@/lib/api/services/members";
 import { attendanceService } from "@/lib/api/services/attendance";
@@ -412,7 +411,6 @@ export function SecretaryDashboard() {
           </div>
         </DialogContent>
       </Dialog>
-      <DashboardFooter />
     </div>
   );
 }

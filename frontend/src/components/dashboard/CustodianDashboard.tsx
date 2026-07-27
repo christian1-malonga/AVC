@@ -10,7 +10,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useNavigate } from "@tanstack/react-router";
 import { musicService, type Song } from "@/lib/api/services/music";
 import { MemberDashboard } from "./MemberDashboard";
-import { DashboardFooter } from "./DashboardFooter";
 import { toast } from "sonner";
 
 export function CustodianDashboard() {
@@ -184,7 +183,6 @@ export function CustodianDashboard() {
         <h3 className="text-lg font-semibold mb-4">Core Member Overview</h3>
         <MemberDashboard />
       </div>
-      <DashboardFooter />
     </div>
   );
 }

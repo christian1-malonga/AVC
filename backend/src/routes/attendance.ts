@@ -52,6 +52,36 @@ export default async function attendanceRoutes(fastify: FastifyInstance) {
     return { data: rows };
   });
 
+  // POST /choir/attendance/check-in/ — self check-in with session code
+  fastify.post<{ Body: { code: string } }>("/choir/attendance/check-in/", { preHandler: requireAuth }, async (request, reply) => {
+    const { code } = request.body;
+    if (!code) return reply.status(400).send({ detail: "Session code required." });
+
+    // Code format: DDD-YYYYMMDD (e.g. THU-20260727, SAT-20260727)
+    const parts = code.trim().toUpperCase().split("-");
+    if (parts.length !== 2 || !["THU", "SAT"].includes(parts[0])) {
+      return reply.status(400).send({ detail: "Invalid code format. Use THU-YYYYMMDD or SAT-YYYYMMDD." });
+    }
+
+    const date = parts[1];
+    if (!/^\d{8}$/.test(date)) {
+      return reply.status(400).send({ detail: "Invalid date in code." });
+    }
+
+    const formattedDate = `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
+
+    // Check if already marked
+    const existing = db.prepare("SELECT id FROM attendance WHERE user_id = ? AND date = ?").get(request.user!.userId, formattedDate);
+    if (existing) {
+      return reply.status(400).send({ detail: "You are already checked in for this session." });
+    }
+
+    db.prepare("INSERT INTO attendance (user_id, date, status, marked_by) VALUES (?, ?, 'PRESENT', ?)")
+      .run(request.user!.userId, formattedDate, request.user!.userId);
+
+    return { data: { detail: `Checked in for ${formattedDate}.` } };
+  });
+
   // POST /choir/attendance/ — mark attendance for a session (date + multiple members)
   fastify.post<{ Body: { date?: string; records: MarkRecord[] } }>("/choir/attendance/", { preHandler: requireAuth }, async (request, reply) => {
     const { date: rawDate, records } = request.body;

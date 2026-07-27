@@ -2,15 +2,22 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   BarChart3,
   Bell,
+  ClipboardList,
   FileText,
+  Fingerprint,
+  Library,
   LogOut,
   Megaphone,
+  Mic,
   Music,
+  Receipt,
+  ScrollText,
   Settings,
   Shield,
   Upload,
   User,
   Users,
+  UsersRound,
   Wallet,
 } from "lucide-react";
 import { type ComponentType, useMemo } from "react";
@@ -42,34 +49,41 @@ const accountNav: NavItem[] = [
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 
-const memberNav: NavItem[] = [
-  { title: "Documents", url: "/documents", icon: FileText },
-  { title: "Debt", url: "/debt", icon: Wallet },
-  { title: "Announcements", url: "/announcements", icon: Megaphone },
-];
-
 const presidentNav: NavItem[] = [
+  { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
   { title: "Members", url: "/members", icon: Users },
   { title: "Approvals", url: "/approvals", icon: Shield },
+  { title: "Audit Logs", url: "/audit-logs", icon: ScrollText },
   { title: "Documents", url: "/documents", icon: FileText },
   { title: "Music Library", url: "/music", icon: Music },
 ];
 
 const provostNav: NavItem[] = [
-  { title: "Attendance", url: "/attendance", icon: Users },
+  { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
+  { title: "Attendance", url: "/attendance", icon: ClipboardList },
   { title: "Upload Debtors", url: "/upload", icon: Upload },
 ];
 
-
-const secretaryNav: NavItem[] = [
-  { title: "Upload", url: "/uploads", icon: Upload },
-  { title: "Documents", url: "/documents", icon: FileText },
-  { title: "Debt", url: "/debt", icon: Wallet },
+const custodianNav: NavItem[] = [
+  { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
+  { title: "Music Library", url: "/music", icon: Music },
+  { title: "Voice Notes", url: "/voice-notes", icon: Mic },
 ];
 
-const custodianNav: NavItem[] = [
+const secretaryNav: NavItem[] = [
+  { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
+  { title: "Debt Tracker", url: "/debt", icon: Wallet },
+  { title: "Documents", url: "/documents", icon: FileText },
+  { title: "Receipts", url: "/receipts", icon: Receipt },
+];
+
+const choristerNav: NavItem[] = [
+  { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
   { title: "Music Library", url: "/music", icon: Music },
-  { title: "Upload Music", url: "/uploads", icon: Upload },
+  { title: "Documents", url: "/documents", icon: FileText },
+  { title: "Debt", url: "/debt", icon: Wallet },
+  { title: "Receipts", url: "/receipts", icon: Receipt },
+  { title: "Check-in", url: "/check-in", icon: Fingerprint },
 ];
 
 export function AppSidebar() {
@@ -85,12 +99,12 @@ export function AppSidebar() {
         return presidentNav;
       case "provost":
         return provostNav;
-      case "secretary":
-        return secretaryNav;
       case "custodian":
         return custodianNav;
+      case "secretary":
+        return secretaryNav;
       default:
-        return memberNav;
+        return choristerNav;
     }
   }, [user?.role]);
 

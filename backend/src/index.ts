@@ -17,6 +17,11 @@ import documentRoutes from "./routes/documents.js";
 import musicRoutes from "./routes/music.js";
 import notificationRoutes from "./routes/notifications.js";
 import statsRoutes from "./routes/stats.js";
+import receiptRoutes from "./routes/receipts.js";
+import voiceNoteRoutes from "./routes/voice-notes.js";
+import auditLogRoutes from "./routes/audit-logs.js";
+import birthdayRoutes from "./routes/birthdays.js";
+import bulkDebtRoutes from "./routes/bulk-debts.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -51,6 +56,11 @@ async function main() {
   await app.register(musicRoutes);
   await app.register(notificationRoutes);
   await app.register(statsRoutes);
+  await app.register(receiptRoutes);
+  await app.register(voiceNoteRoutes);
+  await app.register(auditLogRoutes);
+  await app.register(birthdayRoutes);
+  await app.register(bulkDebtRoutes);
 
   // Health check
   app.get("/api/health", async () => ({ status: "ok" }));

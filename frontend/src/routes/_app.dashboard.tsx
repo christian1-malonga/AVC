@@ -5,6 +5,8 @@ import { MemberDashboard } from "@/components/dashboard/MemberDashboard";
 import { PresidentDashboard } from "@/components/dashboard/PresidentDashboard";
 import { SecretaryDashboard } from "@/components/dashboard/SecretaryDashboard";
 import { CustodianDashboard } from "@/components/dashboard/CustodianDashboard";
+import { ProvostDashboard } from "@/components/dashboard/ProvostDashboard";
+import { BirthdayBanner } from "@/components/dashboard/BirthdayBanner";
 
 export const Route = createFileRoute("/_app/dashboard")({
   component: DashboardRouter,
@@ -24,10 +26,12 @@ function DashboardRouter() {
         return <SecretaryDashboard />;
       case "custodian":
         return <CustodianDashboard />;
+      case "provost":
+        return <ProvostDashboard />;
       default:
         return <MemberDashboard />;
     }
   })();
 
-  return <div className="space-y-6">{dashboard}</div>;
+  return <div className="space-y-6"><BirthdayBanner />{dashboard}</div>;
 }

@@ -31,7 +31,7 @@ async function main() {
   const app = Fastify({ logger: true });
 
   await app.register(cors, {
-    origin: config.frontendUrl,
+    origin: process.env.FRONTEND_URL ? config.frontendUrl : true,
     credentials: true,
   });
 

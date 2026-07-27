@@ -12,6 +12,5 @@ __pycache__
 .env
 .venv
 .vscode
-backend/
 deploy-package/
 check-recharts.js

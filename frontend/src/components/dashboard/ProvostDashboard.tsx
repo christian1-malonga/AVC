@@ -18,6 +18,7 @@ import {
 import { toast } from "sonner";
 import { attendanceService } from "@/lib/api/services/attendance";
 import { membersService } from "@/lib/api/services/members";
+import { BASE_URL } from "@/lib/api/client";
 import type { AuthUser } from "@/lib/api/services/auth";
 
 interface AttendanceSummary {
@@ -235,7 +236,7 @@ export function ProvostDashboard() {
               const form = new FormData();
               form.append("file", file);
               try {
-                const res = await fetch("/debts/bulk/", { method: "POST", headers: { Authorization: `Bearer ${localStorage.getItem("avc_token")}` }, body: form });
+                const res = await fetch(`${BASE_URL}/debts/bulk/`, { method: "POST", headers: { Authorization: `Bearer ${localStorage.getItem("avc_token")}` }, body: form });
                 const data = await res.json();
                 if (res.ok) toast.success(data.data?.detail || "Imported.");
                 else toast.error(data.detail || "Import failed.");

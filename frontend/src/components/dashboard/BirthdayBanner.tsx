@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Cake } from "lucide-react";
+import { BASE_URL } from "@/lib/api/client";
 
 interface BirthdayPerson {
   id: string;
@@ -14,7 +15,7 @@ export function BirthdayBanner() {
   const [birthdays, setBirthdays] = useState<BirthdayPerson[]>([]);
 
   useEffect(() => {
-    fetch("/birthdays/", {
+    fetch(`${BASE_URL}/birthdays/`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("avc_token")}` },
     })
       .then((r) => r.json())

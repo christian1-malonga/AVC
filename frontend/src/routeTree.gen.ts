@@ -17,6 +17,9 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SelectSectionRouteImport } from './routes/select-section'
 import { Route as AppAnnouncementsRouteImport } from './routes/_app.announcements'
 import { Route as AppApprovalsRouteImport } from './routes/_app.approvals'
+import { Route as AppAttendanceRouteImport } from './routes/_app.attendance'
+import { Route as AppAuditLogsRouteImport } from './routes/_app.audit-logs'
+import { Route as AppCheckInRouteImport } from './routes/_app.check-in'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppDebtRouteImport } from './routes/_app.debt'
 import { Route as AppDocumentsRouteImport } from './routes/_app.documents'
@@ -24,9 +27,11 @@ import { Route as AppMembersRouteImport } from './routes/_app.members'
 import { Route as AppMusicRouteImport } from './routes/_app.music'
 import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
+import { Route as AppReceiptsRouteImport } from './routes/_app.receipts'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppStatisticsRouteImport } from './routes/_app.statistics'
 import { Route as AppUploadsRouteImport } from './routes/_app.uploads'
+import { Route as AppVoiceNotesRouteImport } from './routes/_app.voice-notes'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
@@ -68,6 +73,21 @@ const AppApprovalsRoute = AppApprovalsRouteImport.update({
   path: '/approvals',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAttendanceRoute = AppAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAuditLogsRoute = AppAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCheckInRoute = AppCheckInRouteImport.update({
+  id: '/check-in',
+  path: '/check-in',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -103,6 +123,11 @@ const AppProfileRoute = AppProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
+const AppReceiptsRoute = AppReceiptsRouteImport.update({
+  id: '/receipts',
+  path: '/receipts',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -116,6 +141,11 @@ const AppStatisticsRoute = AppStatisticsRouteImport.update({
 const AppUploadsRoute = AppUploadsRouteImport.update({
   id: '/uploads',
   path: '/uploads',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVoiceNotesRoute = AppVoiceNotesRouteImport.update({
+  id: '/voice-notes',
+  path: '/voice-notes',
   getParentRoute: () => AppRoute,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -132,6 +162,9 @@ export interface FileRoutesByFullPath {
   '/select-section': typeof SelectSectionRoute
   '/announcements': typeof AppAnnouncementsRoute
   '/approvals': typeof AppApprovalsRoute
+  '/attendance': typeof AppAttendanceRoute
+  '/audit-logs': typeof AppAuditLogsRoute
+  '/check-in': typeof AppCheckInRoute
   '/dashboard': typeof AppDashboardRoute
   '/debt': typeof AppDebtRoute
   '/documents': typeof AppDocumentsRoute
@@ -139,9 +172,11 @@ export interface FileRoutesByFullPath {
   '/music': typeof AppMusicRoute
   '/notifications': typeof AppNotificationsRoute
   '/profile': typeof AppProfileRoute
+  '/receipts': typeof AppReceiptsRoute
   '/settings': typeof AppSettingsRoute
   '/statistics': typeof AppStatisticsRoute
   '/uploads': typeof AppUploadsRoute
+  '/voice-notes': typeof AppVoiceNotesRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
@@ -152,6 +187,9 @@ export interface FileRoutesByTo {
   '/select-section': typeof SelectSectionRoute
   '/announcements': typeof AppAnnouncementsRoute
   '/approvals': typeof AppApprovalsRoute
+  '/attendance': typeof AppAttendanceRoute
+  '/audit-logs': typeof AppAuditLogsRoute
+  '/check-in': typeof AppCheckInRoute
   '/dashboard': typeof AppDashboardRoute
   '/debt': typeof AppDebtRoute
   '/documents': typeof AppDocumentsRoute
@@ -159,9 +197,11 @@ export interface FileRoutesByTo {
   '/music': typeof AppMusicRoute
   '/notifications': typeof AppNotificationsRoute
   '/profile': typeof AppProfileRoute
+  '/receipts': typeof AppReceiptsRoute
   '/settings': typeof AppSettingsRoute
   '/statistics': typeof AppStatisticsRoute
   '/uploads': typeof AppUploadsRoute
+  '/voice-notes': typeof AppVoiceNotesRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
@@ -174,6 +214,9 @@ export interface FileRoutesById {
   '/select-section': typeof SelectSectionRoute
   '/_app/announcements': typeof AppAnnouncementsRoute
   '/_app/approvals': typeof AppApprovalsRoute
+  '/_app/attendance': typeof AppAttendanceRoute
+  '/_app/audit-logs': typeof AppAuditLogsRoute
+  '/_app/check-in': typeof AppCheckInRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/debt': typeof AppDebtRoute
   '/_app/documents': typeof AppDocumentsRoute
@@ -181,9 +224,11 @@ export interface FileRoutesById {
   '/_app/music': typeof AppMusicRoute
   '/_app/notifications': typeof AppNotificationsRoute
   '/_app/profile': typeof AppProfileRoute
+  '/_app/receipts': typeof AppReceiptsRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/statistics': typeof AppStatisticsRoute
   '/_app/uploads': typeof AppUploadsRoute
+  '/_app/voice-notes': typeof AppVoiceNotesRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
@@ -196,6 +241,9 @@ export interface FileRouteTypes {
     | '/select-section'
     | '/announcements'
     | '/approvals'
+    | '/attendance'
+    | '/audit-logs'
+    | '/check-in'
     | '/dashboard'
     | '/debt'
     | '/documents'
@@ -203,9 +251,11 @@ export interface FileRouteTypes {
     | '/music'
     | '/notifications'
     | '/profile'
+    | '/receipts'
     | '/settings'
     | '/statistics'
     | '/uploads'
+    | '/voice-notes'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -216,6 +266,9 @@ export interface FileRouteTypes {
     | '/select-section'
     | '/announcements'
     | '/approvals'
+    | '/attendance'
+    | '/audit-logs'
+    | '/check-in'
     | '/dashboard'
     | '/debt'
     | '/documents'
@@ -223,9 +276,11 @@ export interface FileRouteTypes {
     | '/music'
     | '/notifications'
     | '/profile'
+    | '/receipts'
     | '/settings'
     | '/statistics'
     | '/uploads'
+    | '/voice-notes'
     | '/api/chat'
   id:
     | '__root__'
@@ -237,6 +292,9 @@ export interface FileRouteTypes {
     | '/select-section'
     | '/_app/announcements'
     | '/_app/approvals'
+    | '/_app/attendance'
+    | '/_app/audit-logs'
+    | '/_app/check-in'
     | '/_app/dashboard'
     | '/_app/debt'
     | '/_app/documents'
@@ -244,9 +302,11 @@ export interface FileRouteTypes {
     | '/_app/music'
     | '/_app/notifications'
     | '/_app/profile'
+    | '/_app/receipts'
     | '/_app/settings'
     | '/_app/statistics'
     | '/_app/uploads'
+    | '/_app/voice-notes'
     | '/api/chat'
   fileRoutesById: FileRoutesById
 }
@@ -318,6 +378,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppApprovalsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/attendance': {
+      id: '/_app/attendance'
+      path: '/attendance'
+      fullPath: '/attendance'
+      preLoaderRoute: typeof AppAttendanceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/audit-logs': {
+      id: '/_app/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/audit-logs'
+      preLoaderRoute: typeof AppAuditLogsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/check-in': {
+      id: '/_app/check-in'
+      path: '/check-in'
+      fullPath: '/check-in'
+      preLoaderRoute: typeof AppCheckInRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -367,6 +448,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProfileRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/receipts': {
+      id: '/_app/receipts'
+      path: '/receipts'
+      fullPath: '/receipts'
+      preLoaderRoute: typeof AppReceiptsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/settings': {
       id: '/_app/settings'
       path: '/settings'
@@ -388,6 +476,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUploadsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/voice-notes': {
+      id: '/_app/voice-notes'
+      path: '/voice-notes'
+      fullPath: '/voice-notes'
+      preLoaderRoute: typeof AppVoiceNotesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -401,6 +496,9 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppAnnouncementsRoute: typeof AppAnnouncementsRoute
   AppApprovalsRoute: typeof AppApprovalsRoute
+  AppAttendanceRoute: typeof AppAttendanceRoute
+  AppAuditLogsRoute: typeof AppAuditLogsRoute
+  AppCheckInRoute: typeof AppCheckInRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppDebtRoute: typeof AppDebtRoute
   AppDocumentsRoute: typeof AppDocumentsRoute
@@ -408,14 +506,19 @@ interface AppRouteChildren {
   AppMusicRoute: typeof AppMusicRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppReceiptsRoute: typeof AppReceiptsRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppStatisticsRoute: typeof AppStatisticsRoute
   AppUploadsRoute: typeof AppUploadsRoute
+  AppVoiceNotesRoute: typeof AppVoiceNotesRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppAnnouncementsRoute: AppAnnouncementsRoute,
   AppApprovalsRoute: AppApprovalsRoute,
+  AppAttendanceRoute: AppAttendanceRoute,
+  AppAuditLogsRoute: AppAuditLogsRoute,
+  AppCheckInRoute: AppCheckInRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppDebtRoute: AppDebtRoute,
   AppDocumentsRoute: AppDocumentsRoute,
@@ -423,9 +526,11 @@ const AppRouteChildren: AppRouteChildren = {
   AppMusicRoute: AppMusicRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppProfileRoute: AppProfileRoute,
+  AppReceiptsRoute: AppReceiptsRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppStatisticsRoute: AppStatisticsRoute,
   AppUploadsRoute: AppUploadsRoute,
+  AppVoiceNotesRoute: AppVoiceNotesRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

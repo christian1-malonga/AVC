@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { AuthUser } from "@/lib/api/services/auth";
 
-export type Role = "member" | "president" | "secretary" | "custodian";
+export type Role = "member" | "president" | "secretary" | "custodian" | "provost";
 export type Section = "bass" | "tenor" | "alto" | "soprano";
 
 const STORAGE_KEY = "avc_user";

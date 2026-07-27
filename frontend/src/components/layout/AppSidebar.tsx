@@ -55,6 +55,11 @@ const presidentNav: NavItem[] = [
   { title: "Music Library", url: "/music", icon: Music },
 ];
 
+const provostNav: NavItem[] = [
+  { title: "Attendance", url: "/attendance", icon: Users },
+  { title: "Upload Debtors", url: "/upload", icon: Upload },
+];
+
 
 const secretaryNav: NavItem[] = [
   { title: "Upload", url: "/uploads", icon: Upload },
@@ -78,6 +83,8 @@ export function AppSidebar() {
     switch (user?.role) {
       case "president":
         return presidentNav;
+      case "provost":
+        return provostNav;
       case "secretary":
         return secretaryNav;
       case "custodian":

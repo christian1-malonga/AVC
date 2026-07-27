@@ -1,11 +1,11 @@
-import Database from "better-sqlite3";
+import Database, { type Database as DatabaseType } from "better-sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DB_PATH = path.join(__dirname, "..", "data", "app.db");
 
-const db = new Database(DB_PATH);
+const db: DatabaseType = new Database(DB_PATH);
 db.pragma("journal_mode = WAL");
 db.pragma("foreign_keys = ON");
 
@@ -22,11 +22,13 @@ export function initDb() {
       full_name TEXT NOT NULL,
       email TEXT NOT NULL UNIQUE,
       phone TEXT NOT NULL DEFAULT '',
+      whatsapp TEXT DEFAULT '',
       password_hash TEXT NOT NULL,
       role TEXT NOT NULL DEFAULT 'member' REFERENCES roles(name),
       section TEXT,
       approved INTEGER NOT NULL DEFAULT 0,
       date_joined TEXT NOT NULL DEFAULT (datetime('now')),
+      birthday TEXT DEFAULT NULL,
       avatar TEXT
     );
 
@@ -53,7 +55,8 @@ export function initDb() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
       date TEXT NOT NULL,
-      status TEXT NOT NULL CHECK(status IN ('PRESENT','ABSENT')),
+      status TEXT NOT NULL CHECK(status IN ('PRESENT','ABSENT','LATE','EXCUSED')),
+      late_fee REAL DEFAULT 0,
       marked_by TEXT REFERENCES users(id),
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
@@ -79,6 +82,26 @@ export function initDb() {
       upload_date TEXT NOT NULL DEFAULT (datetime('now'))
     );
 
+    CREATE TABLE IF NOT EXISTS voice_notes (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      file_path TEXT NOT NULL,
+      category TEXT NOT NULL DEFAULT 'general',
+      uploaded_by TEXT REFERENCES users(id),
+      uploaded_at TEXT NOT NULL DEFAULT (datetime('now')),
+      size INTEGER
+    );
+
+    CREATE TABLE IF NOT EXISTS receipts (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      title TEXT NOT NULL,
+      file_path TEXT,
+      amount REAL NOT NULL DEFAULT 0,
+      uploaded_by TEXT REFERENCES users(id),
+      uploaded_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
     CREATE TABLE IF NOT EXISTS notifications (
       id TEXT PRIMARY KEY,
       type TEXT NOT NULL DEFAULT 'announcement',
@@ -87,7 +110,31 @@ export function initDb() {
       user_id TEXT REFERENCES users(id),
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
+
+    CREATE TABLE IF NOT EXISTS audit_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      action TEXT NOT NULL,
+      performed_by TEXT REFERENCES users(id),
+      target_user TEXT REFERENCES users(id),
+      details TEXT DEFAULT '',
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    -- Safe migrations
+    CREATE TABLE IF NOT EXISTS _migrations (name TEXT PRIMARY KEY);
   `);
+
+  const migrations: [string, string][] = [
+    ['add_whatsapp', "ALTER TABLE users ADD COLUMN whatsapp TEXT DEFAULT ''"],
+    ['add_birthday', "ALTER TABLE users ADD COLUMN birthday TEXT DEFAULT NULL"],
+    ['add_late_fee', "ALTER TABLE attendance ADD COLUMN late_fee REAL DEFAULT 0"],
+  ];
+  for (const [name, sql] of migrations) {
+    try {
+      db.exec(sql);
+      db.prepare("INSERT OR IGNORE INTO _migrations (name) VALUES (?)").run(name);
+    } catch { /* column already exists */ }
+  }
 }
 
 export default db;

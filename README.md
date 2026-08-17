@@ -4,7 +4,7 @@
 
 ## Vision
 
-AVC brings choir administration, communication, and coordination into one dependable digital environment. The platform is designed for members, section leaders, choir officers, and administrators. Its goal is to reduce fragmented information and give the choir a clear foundation for membership, attendance, rehearsals, repertoire, announcements, documents, finance, notifications, reporting, and leadership workflows.
+AVC brings choir administration, communication, and coordination into one dependable digital environment. The platform is designed for members, choir officers, and administrators. Its goal is to reduce fragmented information and give the choir a clear foundation for membership, attendance, rehearsals, repertoire, announcements, documents, finance, notifications, reporting, and leadership workflows.
 
 ## Current Experience
 
@@ -12,12 +12,43 @@ The current frontend provides Home, Login, Sign Up, and Section Selection. Visit
 
 ## Product Modules
 
-Planned modules include member profiles, voice-section management, role-based approvals, attendance and check-in, events and rehearsals, music and repertoire, announcements, documents and media, finance and receipts, notifications, voice notes, leadership dashboards, and operational reports.
+Planned modules include member profiles, role-based approvals, attendance and check-in, events and rehearsals, music and repertoire, announcements, documents and media, finance and receipts, notifications, voice notes, leadership dashboards, and operational reports.
 
-## Roles
+## Official User Roles and Responsibilities
 
-Members access personal and section information. Section Leaders coordinate voice sections. Secretaries manage records and communication. Music Leadership manages repertoire and rehearsal resources. Treasurers manage authorized financial records. Presidents and Administrators manage approvals, permissions, governance, and reporting.
+The AVC platform is organized around the following official responsibilities.
 
+### All Choristers
+
+View debts, view announcements, view attendance, access documents, and access music files.
+
+### President / Admin
+
+View the total number of members, upload documents, view all members debts, approve new members, assign and manage user roles, and set weekly dues.
+
+### Custodian
+
+Upload songs, upload audio files, and upload related music files.
+
+### Provost
+
+Manage and record attendance, upload debts related to absences and lateness, and manage members on probation.
+
+### Secretary
+
+Upload meeting minutes, upload receipts, and upload supporting documents.
+
+### Electoral
+
+The Electoral role is part of the official AVC role structure. Its specific responsibilities will be documented when they are formally defined.
+
+## Development Task Distribution
+
+| Area | Assigned contributors |
+|---|---|
+| Front-End | Christian, Samsax |
+| Back-End | Kennedy |
+| Database | Samuel OTOBO |
 ## Architecture
 
 The application uses a decoupled full-stack architecture: React, TypeScript, Vite, TanStack Router, Tailwind CSS, React Hook Form, Framer Motion, and reusable UI components on the frontend; Django and Django REST Framework on the backend. Django is responsible for authentication, database models, business rules, permissions, APIs, auditability, and secure server-side validation.
@@ -43,7 +74,7 @@ Django development will use a Python virtual environment, ackend/requirements.t
 
 ## Roadmap
 
-The roadmap covers Django authentication, Google OAuth, persistent users and roles, member and section management, attendance, events, repertoire, documents, announcements, notifications, finance, leadership dashboards, automated tests, accessibility review, deployment, monitoring, and backups.
+The roadmap covers Django authentication, Google OAuth, persistent users and roles, member management, attendance, events, repertoire, documents, announcements, notifications, finance, leadership dashboards, automated tests, accessibility review, deployment, monitoring, and backups.
 
 ## Status
 
@@ -52,3 +83,5 @@ AVC is an active full-stack foundation. Frontend authentication and Google sign-
 ## License
 
 This project is developed for the AVC choir administration initiative. Licensing and production distribution terms should be formalized before public redistribution.
+
+

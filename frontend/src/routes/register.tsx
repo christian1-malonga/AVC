@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+﻿import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
   ssr: false,
-  head: () => ({ meta: [{ title: "Register — AVC" }] }),
+  head: () => ({ meta: [{ title: "Register - AVC" }] }),
 });
 
 interface FormData {
@@ -24,7 +24,6 @@ interface FormData {
   phone: string;
   password: string;
   confirm: string;
-  leadership_code?: string;
 }
 
 function RegisterPage() {
@@ -44,7 +43,6 @@ function RegisterPage() {
           email: data.email,
           phone: data.phone,
           password: data.password,
-          leadership_code: data.leadership_code,
         });
       toast.success("Registration submitted");
       navigate({ to: "/pending" });
@@ -71,7 +69,7 @@ function RegisterPage() {
             Create your account, wait for the President's approval, then step into the ministry.
           </p>
         </div>
-        <p className="relative text-xs text-white/60">© {new Date().getFullYear()} St. Barnabas AVC</p>
+        <p className="relative text-xs text-white/60">@ {new Date().getFullYear()} St. Barnabas AVC</p>
       </div>
 
       <div className="flex items-center justify-center p-6 bg-background">
@@ -86,10 +84,10 @@ function RegisterPage() {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="First Name" error={errors.first_name?.message}>
-                    <Input placeholder="Grace" {...register("first_name", { required: "Required" })} />
+                    <Input placeholder="Enter your first name" {...register("first_name", { required: "Required" })} />
                   </Field>
                   <Field label="Last Name" error={errors.last_name?.message}>
-                    <Input placeholder="Muthoni" {...register("last_name", { required: "Required" })} />
+                    <Input placeholder="Enter your last name" {...register("last_name", { required: "Required" })} />
                   </Field>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -109,25 +107,25 @@ function RegisterPage() {
                   </Field>
                 </div>
 
-                <div className="rounded-lg border border-dashed border-gold/60 bg-gold/5 p-4 space-y-2">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="h-4 w-4 text-gold-foreground" />
-                    <Label className="text-sm font-semibold">Leadership Access Code (optional)</Label>
-                  </div>
-                  <Input placeholder="Leave blank for member access" {...register("leadership_code")} />
-                  <p className="text-[11px] text-muted-foreground">
-                    If provided, the backend validates it for the President login flow. Leave blank for normal member registration.
-                  </p>
-                </div>
 
-                <Button type="submit" disabled={loading} className="w-full bg-gradient-primary text-primary-foreground shadow-elegant">
+<Button type="submit" disabled={loading} className="w-full bg-gradient-primary text-primary-foreground shadow-elegant">
                   {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                   Create Account
                 </Button>
+                <div className="relative flex items-center py-1">
+                  <div className="flex-1 border-t border-border/60" />
+                  <span className="px-3 text-[10px] font-semibold tracking-[0.2em] text-muted-foreground">OR</span>
+                  <div className="flex-1 border-t border-border/60" />
+                </div>
+                <Button type="button" variant="outline" onClick={() => toast.info("Google sign-in is coming soon.")} className="w-full h-11 border-border/70 bg-white/70 hover:bg-white">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" className="mr-2 h-5 w-5"><path fill="#4285F4" d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.7 2.91-4.2 2.91-7.42Z"/><path fill="#34A853" d="M12 21.7c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.74 9.74 0 0 0 12 21.7Z"/><path fill="#FBBC05" d="M6.54 13.78A5.85 5.85 0 0 1 6.23 12c0-.62.11-1.22.31-1.78V7.69H3.3A9.73 9.73 0 0 0 2.27 12c0 1.57.38 3.05 1.03 4.31l3.24-2.53Z"/><path fill="#EA4335" d="M12 6.19c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.28 14.63 2.3 12 2.3a9.74 9.74 0 0 0-8.7 5.39l3.24 2.53c.77-2.31 2.92-4.03 5.46-4.03Z"/></svg>
+                  Continue with Google
+                </Button>
+                
               </form>
               <div className="text-sm text-center text-muted-foreground">
                 Already have an account?{" "}
-                <Link to="/login" className="text-secondary font-medium hover:underline">
+                <Link to="/login" className="text-primary font-semibold underline underline-offset-4 hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   Sign in
                 </Link>
               </div>
@@ -148,3 +146,10 @@ function Field({ label, error, children }: { label: string; error?: string; chil
     </div>
   );
 }
+
+
+
+
+
+
+

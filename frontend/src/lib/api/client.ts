@@ -1,75 +1,60 @@
-function getToken(): string | null {
-  if (typeof window === "undefined") return null;
-  try {
-    return localStorage.getItem("avc_token");
-  } catch {
-    return null;
-  }
+export const BASE_URL = "";
+
+type ApiResponse<T> = { data: T; status: number; statusText?: string };
+
+const demoUser = {
+  id: "demo-user",
+  full_name: "Alex Morgan",
+  email: "demo@avc.local",
+  phone: "+1 555 0100",
+  role: "president",
+  section: "soprano",
+};
+
+const mockData: Record<string, unknown> = {
+  "/analytics/stats/": { total_members: 84, active_members: 76, attendance_rate: 92, total_debt: 1240, monthly_attendance: [ { month: "Jan", attendance: 88 }, { month: "Feb", attendance: 91 }, { month: "Mar", attendance: 94 }, { month: "Apr", attendance: 92 } ] },
+  "/auth/roles/": ["member", "president", "secretary", "custodian"],
+  "/members/": [ { id: "m-001", full_name: "Alex Morgan", email: "alex@avc.local", section: "soprano", role: "president", status: "active" }, { id: "m-002", full_name: "Jordan Lee", email: "jordan@avc.local", section: "tenor", role: "member", status: "active" }, { id: "m-003", full_name: "Sam Rivera", email: "sam@avc.local", section: "alto", role: "member", status: "active" } ],
+  "/notifications/": [ { id: "n-001", title: "Welcome to AVC", message: "Your local demo workspace is ready.", type: "general", read: false, created_at: new Date().toISOString() } ],
+  "/music/": [ { id: "song-001", title: "Amazing Grace", composer: "Traditional", category: "Anthem", duration: "04:12" }, { id: "song-002", title: "Be Thou My Vision", composer: "Traditional", category: "Worship", duration: "03:48" } ],
+  "/receipts/": [],
+  "/voice-notes/": [],
+  "/documents/": [],
+  "/audit-logs/": [],
+  "/debts/my/": { total: 1240, paid: 800, outstanding: 440, details: [] },
+  "/choir/attendance/summary/": { attendance_rate: 92, present: 76, absent: 8, excused: 4 },
+};
+
+function valueFor(url: string): unknown {
+  const key = Object.keys(mockData).find((candidate) => url === candidate || url.startsWith(candidate));
+  return key ? mockData[key] : [];
 }
 
-const BASE_URL =
-  typeof window !== "undefined" &&
-  (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
-    ? "http://localhost:4000"
-    : "";
-
-export { BASE_URL };
-
-function clearAuth() {
+function persistUser(user: unknown) {
   if (typeof window === "undefined") return;
-  try {
-    localStorage.removeItem("avc_token");
-    localStorage.removeItem("avc_user");
-  } catch { /* ignore */ }
+  try { window.localStorage.setItem("avc_user", JSON.stringify(user)); } catch { /* local mock storage is optional */ }
 }
 
-async function request<T>(method: string, url: string, data?: any, config?: any): Promise<{ data: T; status: number }> {
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-
-  const token = getToken();
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+async function request<T>(method: string, url: string, data?: unknown): Promise<ApiResponse<T>> {
+  if (url.includes("/auth/login/") || url.includes("/auth/register/")) {
+    persistUser(demoUser);
+    return { data: { user: demoUser, token: "mock-token" } as T, status: 200 };
   }
-
-  const isFormData = data instanceof FormData;
-  if (isFormData) {
-    delete headers["Content-Type"];
+  if (url.includes("/accounts/profile/")) {
+    return { data: { ...demoUser, ...(data as object || {}) } as T, status: 200 };
   }
-
-  const options: RequestInit = {
-    method,
-    headers,
-    body: data ? (isFormData ? data : JSON.stringify(data)) : undefined,
-  };
-
-  const response = await fetch(`${BASE_URL}${url}`, options);
-
-  if (response.status === 401) {
-    clearAuth();
-  }
-
-  let body: any;
-  const contentType = response.headers.get("content-type") || "";
-  if (contentType.includes("application/json")) {
-    body = await response.json();
-  } else {
-    body = await response.text();
-  }
-
-  if (!response.ok) {
-    const error: any = new Error(body?.detail || body?.message || `Request failed: ${response.status}`);
-    error.response = { status: response.status, data: body };
-    throw error;
-  }
-
-  return { data: body?.data ?? body, status: response.status };
+  if (method === "DELETE") return { data: { detail: "Deleted locally" } as T, status: 200 };
+  if (method === "POST" || method === "PATCH" || method === "PUT") return { data: (data ?? { detail: "Saved locally" }) as T, status: 200 };
+  return { data: valueFor(url) as T, status: 200 };
 }
 
 export const api = {
-  get: <T>(url: string, config?: any) => request<T>("GET", url, undefined, config),
-  post: <T>(url: string, data?: any, config?: any) => request<T>("POST", url, data, config),
-  patch: <T>(url: string, data?: any) => request<T>("PATCH", url, data),
-  delete: (url: string) => request<any>("DELETE", url),
+  get: <T>(url: string, _config?: unknown) => request<T>("GET", url),
+  post: <T>(url: string, data?: unknown, _config?: unknown) => request<T>("POST", url, data),
+  put: <T>(url: string, data?: unknown, _config?: unknown) => request<T>("PUT", url, data),
+  patch: <T>(url: string, data?: unknown, _config?: unknown) => request<T>("PATCH", url, data),
+  delete: <T>(url: string, _config?: unknown) => request<T>("DELETE", url),
 };
+
+export const MOCK_MODE = true;
+

@@ -13,4 +13,5 @@ __pycache__
 .venv
 .vscode
 deploy-package/
-check-recharts.js
+check-recharts.js.idea 
+.idea 

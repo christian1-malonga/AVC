@@ -1,6 +1,6 @@
 ﻿# AVC | Amazing Voices Choir Management Platform
 
-![Status](https://img.shields.io/badge/status-active%20development-1f6feb) ![Frontend](https://img.shields.io/badge/frontend-React%20%7C%20TypeScript-61dafb) ![Backend](https://img.shields.io/badge/backend-Django-092e20) ![License](https://img.shields.io/badge/license-project%20specific-lightgrey)
+[![Repository](https://img.shields.io/badge/repository-GitHub-181717?logo=github)](https://github.com/christian1-malonga/AVC) [![Documentation](https://img.shields.io/badge/docs-README-0A66C2)](https://github.com/christian1-malonga/AVC#readme) ![Status](https://img.shields.io/badge/status-active%20development-1f6feb) ![Frontend](https://img.shields.io/badge/frontend-React%20%7C%20TypeScript-61dafb) ![Backend](https://img.shields.io/badge/backend-Django-092e20) ![License](https://img.shields.io/badge/license-project%20specific-lightgrey)
 
 > A professional digital platform for the administration, coordination, and growth of St. Barnabas Amazing Voices Choir.
 
@@ -52,9 +52,20 @@ The Electoral role is part of the official AVC role structure. Responsibilities 
 
 | Area | Contributors |
 |---|---|
-| Front-End | Christian, Samsax |
-| Back-End | Kennedy |
-| Database | Samuel OTOBO |
+| Front-End | Christian Malonga — AI Engineer; Samson Kolade — Information Technology Engineer |
+| Back-End | Kennedy Chibueze — Software Engineer |
+| Database | Samuel OTOBO — Computer Engineer |
+
+## Engineering Team
+
+The AVC engineering team combines product, software, data, and artificial-intelligence capabilities.
+
+| Contributor | Professional role |
+|---|---|
+| Christian Malonga | AI Engineer |
+| Kennedy Chibueze | Software Engineer |
+| Samuel OTOBO | Computer Engineer |
+| Samson Kolade | Information Technology Engineer |
 
 ## Architecture
 
@@ -113,3 +124,58 @@ AVC is an active full-stack foundation. Frontend authentication and Google sign-
 ## License
 
 This project is developed for the AVC choir administration initiative. Licensing and production distribution terms should be formalized before public redistribution.
+
+
+
+## AI and Intelligent Assistance
+
+AVC will include an AI assistance layer designed to help members and administrators find information, understand workflows, and interact with the platform through natural language. The chatbot is not intended to replace choir leadership. It will act as a controlled assistant that improves discoverability, reduces repetitive questions, and guides users toward the correct official workflow.
+
+### Planned Chatbot Capabilities
+
+The chatbot may answer questions about announcements, attendance procedures, available documents, rehearsal information, music resources, dues guidance, account navigation, and general platform usage. It may also help users locate authorized information, explain a form, summarize a published announcement, or direct a request to the appropriate administrator.
+
+### AI Architecture
+
+`	ext
+User message
+    -> React chat interface
+    -> Django API and authentication context
+    -> Permission-aware orchestration layer
+    -> Retrieval from approved AVC knowledge sources
+    -> AI model response with citations or source references
+    -> Auditable response returned to the user
+`
+
+The chatbot will be integrated through Django rather than connected directly from the browser to a model provider. Django will validate identity, enforce role permissions, apply rate limits, protect provider credentials, select approved context, record appropriate audit events, and return a controlled response to the React client.
+
+### Grounding and Knowledge Sources
+
+The assistant should use approved AVC content such as published announcements, official policies, schedules, documents, music metadata, and help content. Responses should be grounded in current source material whenever possible. If the required information is unavailable, the assistant should state that clearly and direct the user to a human administrator instead of inventing an answer.
+
+### Privacy and Safety
+
+The AI layer must not expose private member information, financial records, leadership documents, or role-restricted content. Retrieval must be permission-aware, prompts and provider credentials must remain server-side, sensitive fields must be minimized, and important administrative decisions must remain subject to human approval. Chat responses should be treated as assistance, not as an authoritative replacement for official records.
+
+### AI Roadmap
+
+The planned AI roadmap includes a secure FAQ assistant, document-aware search, announcement summarization, guided onboarding, attendance and rehearsal assistance, administrator support tools, feedback collection, evaluation datasets, prompt versioning, observability, refusal behavior, and human escalation workflows.
+
+## API and Integration Direction
+
+The Django backend will expose versioned endpoints for authentication, users, roles, sections, attendance, announcements, documents, music, finance, notifications, and AI assistance. API contracts should be documented before integration, validated on the server, and covered by automated tests. The frontend should communicate through a dedicated client layer rather than embedding business rules in route components.
+
+## Collaboration Workflow
+
+Contributors should create focused branches, keep commits small and descriptive, run the frontend build before opening a pull request, and explain the user or system behavior affected by a change. Pull requests should be reviewed before merging into main. Secrets, local logs, generated output, and temporary scripts must never be committed.
+
+## Useful Links
+
+- [AVC Repository](https://github.com/christian1-malonga/AVC)
+- [Frontend directory](https://github.com/christian1-malonga/AVC/tree/main/frontend)
+- [Issues](https://github.com/christian1-malonga/AVC/issues)
+- [Pull requests](https://github.com/christian1-malonga/AVC/pulls)
+- [GitHub Collaboration Guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/inviting-collaborators-to-a-personal-repository)
+
+
+

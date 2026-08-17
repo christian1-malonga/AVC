@@ -179,3 +179,56 @@ Contributors should create focused branches, keep commits small and descriptive,
 
 
 
+
+
+
+## AI Product Charter
+
+The AVC AI layer is a controlled product capability designed to help members and administrators discover official information, understand workflows, and use the platform through natural language. It supports choir leadership; it does not replace human authority over sensitive decisions.
+
+### Planned Chatbot Experience
+
+The future chatbot will be available through a dedicated React conversation interface. Authenticated users will be able to ask questions about announcements, attendance procedures, documents, rehearsal information, music resources, dues guidance, account navigation, and platform usage. The assistant should provide concise answers, link to approved sources, express uncertainty, and escalate unresolved matters to an administrator.
+
+### AI Interaction Model
+
+`	ext
+User message -> React chat interface
+             -> Django authentication and API boundary
+             -> Permission-aware AI orchestration
+             -> Retrieval from approved AVC knowledge
+             -> Model provider
+             -> Response validation, sources, and audit event
+             -> Controlled answer returned to the user
+`
+
+The browser must never contain provider secrets or call a model directly for protected operations. Django will validate identity, enforce role and object permissions, apply rate limits, select the minimum context required, call the approved model service, validate the response, and record appropriate audit events.
+
+### Retrieval-Augmented Generation
+
+Approved announcements, policies, schedules, documents, music metadata, and help content can be indexed with source, owner, visibility, publication date, and role-scope metadata. Retrieval must filter by authorization before any content reaches the model. Grounded responses should cite or link to the underlying source whenever possible.
+
+### Safety and Privacy
+
+The chatbot must not invent policies, expose private member information, reveal financial records, approve members, modify official records, assign roles, or replace leadership decisions. Prompts, credentials, system instructions, and evaluation data remain server-side. Logs should minimize personal data and follow retention and deletion requirements.
+
+### AI Evaluation
+
+Before production release, the assistant should be evaluated for factual grounding, source attribution, permission isolation, refusal quality, prompt-injection resistance, latency, availability, cost, and usefulness. Prompt versions, model versions, retrieval configurations, safety tests, feedback, and human-review decisions should be tracked.
+
+### AI Roadmap
+
+The roadmap includes a secure FAQ assistant, document-aware search, announcement summarization, guided onboarding, attendance assistance, administrator support tools, feedback collection, evaluation datasets, prompt versioning, observability, refusal behavior, and human escalation workflows.
+
+## Professional Technical Links
+
+- [AVC Repository](https://github.com/christian1-malonga/AVC)
+- [Frontend Source](https://github.com/christian1-malonga/AVC/tree/main/frontend)
+- [Issues](https://github.com/christian1-malonga/AVC/issues)
+- [Pull Requests](https://github.com/christian1-malonga/AVC/pulls)
+- [React Documentation](https://react.dev/learn)
+- [Vite Documentation](https://vite.dev/guide/)
+- [Django Documentation](https://docs.djangoproject.com/)
+- [Django REST Framework](https://www.django-rest-framework.org/)
+- [OpenAI Platform Documentation](https://platform.openai.com/docs/)
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)

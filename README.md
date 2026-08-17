@@ -58,10 +58,10 @@ The Electoral role is part of the official AVC role structure. Responsibilities 
 
 ## Engineering Team
 
-The AVC project team combines engineering, artificial-intelligence, design, architecture, information-systems, and project-management capabilities.
+The AVC project team combines engineering, artificial intelligence, design, architecture, information systems, and project management capabilities.
 
 | Contributor | Professional background | Project responsibility |
-|---|---|
+|---|---|---|
 | Christian Malonga | AI Engineer | AI Engineering and Front-End |
 | Kennedy Chibueze | Software Engineer | Back-End Engineering |
 | Samuel OTOBO | Computer Engineer | Database Engineering |
@@ -235,4 +235,5 @@ The roadmap includes a secure FAQ assistant, document-aware search, announcement
 - [Django REST Framework](https://www.django-rest-framework.org/)
 - [OpenAI Platform Documentation](https://platform.openai.com/docs/)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+
 

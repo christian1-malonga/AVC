@@ -1,26 +1,32 @@
-﻿# AVC - Amazing Voices Choir Management Platform
+﻿# AVC | Amazing Voices Choir Management Platform
 
-> A professional digital administration platform for St. Barnabas Amazing Voices Choir.
+![Status](https://img.shields.io/badge/status-active%20development-1f6feb) ![Frontend](https://img.shields.io/badge/frontend-React%20%7C%20TypeScript-61dafb) ![Backend](https://img.shields.io/badge/backend-Django-092e20) ![License](https://img.shields.io/badge/license-project%20specific-lightgrey)
 
-## Vision
+> A professional digital platform for the administration, coordination, and growth of St. Barnabas Amazing Voices Choir.
 
-AVC brings choir administration, communication, and coordination into one dependable digital environment. The platform is designed for members, choir officers, and administrators. Its goal is to reduce fragmented information and give the choir a clear foundation for membership, attendance, rehearsals, repertoire, announcements, documents, finance, notifications, reporting, and leadership workflows.
+## Overview
 
-## Current Experience
+AVC is a full-stack choir-management platform designed to bring membership, communication, attendance, music, documents, finance, and leadership operations into one dependable digital environment. The product is built for clarity: members should understand what they need to do, and administrators should have the structure required to coordinate the choir responsibly.
 
-The current frontend provides Home, Login, Sign Up, and Section Selection. Visitors are directed to Login, successful authentication continues to Section Selection, and Login and Sign Up share the same flow with regular forms, OR, a clickable mock Continue with Google button, and navigation between the two pages.
+This repository is organized around a decoupled React frontend and a Django backend. The frontend is currently being developed with local mock services so that the user experience can evolve independently while the production API, database, and security model are completed.
 
-## Product Modules
+## Product Scope
 
-Planned modules include member profiles, role-based approvals, attendance and check-in, events and rehearsals, music and repertoire, announcements, documents and media, finance and receipts, notifications, voice notes, leadership dashboards, and operational reports.
+| Domain | Purpose |
+|---|---|
+| Identity | Login, Sign Up, account status, and future Google OAuth |
+| Choristers | Personal information, debts, announcements, attendance, documents, and music files |
+| Administration | Member approvals, roles, documents, weekly dues, and reporting |
+| Music | Songs, audio files, repertoire, and rehearsal resources |
+| Attendance | Presence, absences, lateness, and probation records |
+| Records | Meeting minutes, receipts, supporting documents, and audit history |
+| Communication | Announcements, notifications, and operational updates |
 
-## Official User Roles and Responsibilities
-
-The AVC platform is organized around the following official responsibilities.
+## Official User Roles
 
 ### All Choristers
 
-View debts, view announcements, view attendance, access documents, and access music files.
+View debts, announcements, and attendance; access documents and music files.
 
 ### President / Admin
 
@@ -28,7 +34,7 @@ View the total number of members, upload documents, view all members debts, appr
 
 ### Custodian
 
-Upload songs, upload audio files, and upload related music files.
+Upload songs, audio files, and related music files.
 
 ### Provost
 
@@ -36,52 +42,74 @@ Manage and record attendance, upload debts related to absences and lateness, and
 
 ### Secretary
 
-Upload meeting minutes, upload receipts, and upload supporting documents.
+Upload meeting minutes, receipts, and supporting documents.
 
 ### Electoral
 
-The Electoral role is part of the official AVC role structure. Its specific responsibilities will be documented when they are formally defined.
+The Electoral role is part of the official AVC role structure. Responsibilities will be documented when formally defined.
 
 ## Development Task Distribution
 
-| Area | Assigned contributors |
+| Area | Contributors |
 |---|---|
 | Front-End | Christian, Samsax |
 | Back-End | Kennedy |
 | Database | Samuel OTOBO |
+
 ## Architecture
 
-The application uses a decoupled full-stack architecture: React, TypeScript, Vite, TanStack Router, Tailwind CSS, React Hook Form, Framer Motion, and reusable UI components on the frontend; Django and Django REST Framework on the backend. Django is responsible for authentication, database models, business rules, permissions, APIs, auditability, and secure server-side validation.
-
 `	ext
-React + TypeScript + Vite -> Django REST API -> Database and secure services
+React + TypeScript + Vite
+        |
+        | REST / JSON API
+        v
+Django + Django REST Framework
+        |
+        v
+Database, permissions, files, audit, and integrations
 `
 
-The frontend currently runs with local mock services while the Django backend is implemented and connected. Future integrations include Google OAuth, email delivery, secure file storage, calendar services, and reporting.
+### Frontend
+
+React and TypeScript provide the interface. Vite powers development and builds. TanStack Router manages typed file-based routing. Tailwind CSS and reusable components provide visual consistency. React Hook Form, Framer Motion, and Lucide support forms, motion, and interaction details.
+
+### Backend
+
+Django is the designated backend. It will own authentication, models, validation, business rules, permissions, APIs, auditability, and secure server-side enforcement. Django REST Framework is the intended API layer. The frontend must never be treated as the authority for sensitive permissions or financial access.
+
+## Application Flow
+
+`	ext
+Home -> Login or Sign Up -> Authentication -> Section Selection -> Role-aware experience
+`
+
+## Local Development
+
+`ash
+cd frontend
+npm install
+npm run dev -- --host 0.0.0.0 --port 8081
+npm run build
+`
+
+The frontend runs locally at http://localhost:8081/. Django development will use a Python virtual environment, ackend/requirements.txt, migrations, environment variables, and python backend/manage.py runserver.
+
+## Engineering Standards
+
+Changes should preserve a successful build, keep authentication boundaries explicit, place business rules in Django, protect sensitive data with server-side permissions, and introduce features with validation, tests, accessibility review, and documentation. Environment secrets must remain outside source control.
 
 ## Security
 
-Production security requires protected sessions, CSRF protection, server-side authorization, role-based permissions, validation, rate limiting, secure file access, audit logging, protected environment variables, encrypted transport, and tested backup procedures. The frontend is never the authority for sensitive permissions or financial access.
-
-## Development
-
-Frontend: cd frontend, 
-pm install, 
-pm run dev -- --host 0.0.0.0 --port 8081. Build with 
-pm run build. The local frontend is available at http://localhost:8081/.
-
-Django development will use a Python virtual environment, ackend/requirements.txt, migrations, environment variables, and python backend/manage.py runserver.
+Production readiness requires secure sessions, CSRF protection, role-based authorization, input validation, rate limiting, protected file access, audit logging, encrypted transport, secure environment variables, backups, and monitoring.
 
 ## Roadmap
 
-The roadmap covers Django authentication, Google OAuth, persistent users and roles, member management, attendance, events, repertoire, documents, announcements, notifications, finance, leadership dashboards, automated tests, accessibility review, deployment, monitoring, and backups.
+Complete Django authentication and API integration; add Google OAuth; introduce persistent users and roles; implement membership, attendance, music, documents, announcements, finance, notifications, dashboards, automated tests, deployment, and observability.
 
 ## Status
 
-AVC is an active full-stack foundation. Frontend authentication and Google sign-in are currently mock interactions; Django is the designated production backend.
+AVC is an active full-stack foundation. Frontend authentication and Google sign-in are currently mock interactions. Django is the designated production backend.
 
 ## License
 
 This project is developed for the AVC choir administration initiative. Licensing and production distribution terms should be formalized before public redistribution.
-
-

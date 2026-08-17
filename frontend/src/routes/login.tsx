@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+﻿import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ import type { AuthUser } from "@/lib/api/services/auth";
 export const Route = createFileRoute("/login")({
   component: LoginPage,
   ssr: false,
-  head: () => ({ meta: [{ title: "Sign in — AVC Administration" }] }),
+  head: () => ({ meta: [{ title: "Sign in - AVC Administration" }] }),
 });
 
 function LoginPage() {
@@ -56,7 +56,7 @@ function LoginPage() {
 
         <div className="max-w-md space-y-6">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/50">
-            <span className="h-px w-8 bg-white/30" /> Established 1987
+            <span className="h-px w-8 bg-white/30" /> 
           </div>
           <h1 className="text-3xl font-semibold leading-[1.15] tracking-tight text-white">
             Membership, finance, and repertoire management for St. Barnabas AVC.
@@ -79,8 +79,8 @@ function LoginPage() {
         </div>
 
         <div className="flex items-center justify-between text-[11px] text-white/40">
-          <span>© {new Date().getFullYear()} St. Barnabas AVC</span>
-          <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5" /> TLS 1.3 · SSO Ready</span>
+          <span>@ {new Date().getFullYear()} St. Barnabas AVC</span>
+          <span className="inline-flex items-center gap-1.5">TLS 1.3 - SSO Ready</span>
         </div>
       </div>
 
@@ -150,7 +150,8 @@ function LoginPage() {
               Keep me signed in on this device
             </label>
 
-            <Button
+            
+<Button
               type="submit"
               disabled={loading}
               className="w-full h-10 rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
@@ -159,11 +160,22 @@ function LoginPage() {
               Sign in
             </Button>
           </form>
+              <div className="relative flex items-center py-1">
+                <div className="flex-1 border-t border-border/60" />
+                <span className="px-3 text-[10px] font-semibold tracking-[0.2em] text-muted-foreground">OR</span>
+                <div className="flex-1 border-t border-border/60" />
+              </div>
+              <Button type="button" variant="outline" onClick={() => toast.info("Google sign-in is coming soon.")} className="w-full h-11 border-border/70 bg-white/70 hover:bg-white">
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="mr-2 h-5 w-5"><path fill="#4285F4" d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.7 2.91-4.2 2.91-7.42Z"/><path fill="#34A853" d="M12 21.7c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.74 9.74 0 0 0 12 21.7Z"/><path fill="#FBBC05" d="M6.54 13.78A5.85 5.85 0 0 1 6.23 12c0-.62.11-1.22.31-1.78V7.69H3.3A9.73 9.73 0 0 0 2.27 12c0 1.57.38 3.05 1.03 4.31l3.24-2.53Z"/><path fill="#EA4335" d="M12 6.19c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.28 14.63 2.3 12 2.3a9.74 9.74 0 0 0-8.7 5.39l3.24 2.53c.77-2.31 2.92-4.03 5.46-4.03Z"/></svg>
+                Continue with Google
+              </Button>
+
+
 
           <div className="mt-8 pt-6 border-t border-border text-xs text-muted-foreground flex items-center justify-between">
             <span>Need an account?</span>
             <Link to="/register" className="text-foreground font-medium hover:underline underline-offset-2">
-              Request access →
+              Request access
             </Link>
           </div>
         </div>
@@ -171,3 +183,14 @@ function LoginPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+

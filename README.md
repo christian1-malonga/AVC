@@ -1,52 +1,54 @@
-﻿# AVC - Amazing Voices Choir Administration
+﻿# AVC - Amazing Voices Choir Management Platform
 
-> A focused frontend foundation for the digital administration of St. Barnabas Amazing Voices Choir.
+> A professional digital administration platform for St. Barnabas Amazing Voices Choir.
 
-## Overview
+## Vision
 
-AVC is a focused web application foundation designed to give choir members and leadership a clear, professional entry point into a future digital administration platform. The current release concentrates on the essential onboarding experience: Login, Sign Up, mock Google sign-in, and authenticated section selection.
-
-This deliberately focused architecture keeps the frontend usable while backend services are being defined. Mock boundaries make the application easy to test today and provide explicit integration points for future authentication, authorization, and choir-management services.
-
-## Product Vision
-
-Choir administration requires more than schedules and attendance. It requires a dependable environment where members understand their next step and leadership can progressively introduce the tools needed to serve the choir. AVC is designed to grow into a complete platform for membership, attendance, music and repertoire, communication, documents, finance, notifications, reporting, and leadership workflows.
+AVC brings choir administration, communication, and coordination into one dependable digital environment. The platform is designed for members, section leaders, choir officers, and administrators. Its goal is to reduce fragmented information and give the choir a clear foundation for membership, attendance, rehearsals, repertoire, announcements, documents, finance, notifications, reporting, and leadership workflows.
 
 ## Current Experience
 
-The home route directs unauthenticated visitors to Login. Login and Sign Up share a consistent flow with regular forms, a clearly separated OR option, a clickable Continue with Google mock button, and navigation to the complementary authentication page. After successful local authentication or account creation, users continue to the Section Selection page.
+The current frontend provides Home, Login, Sign Up, and Section Selection. Visitors are directed to Login, successful authentication continues to Section Selection, and Login and Sign Up share the same flow with regular forms, OR, a clickable mock Continue with Google button, and navigation between the two pages.
 
-## Technology
+## Product Modules
 
-The frontend is built with React and TypeScript, powered by Vite and TanStack Router. Tailwind CSS provides the styling foundation, while reusable UI components keep the interface consistent. React Hook Form, Framer Motion, Lucide icons, and a local authentication context support the current experience.
+Planned modules include member profiles, voice-section management, role-based approvals, attendance and check-in, events and rehearsals, music and repertoire, announcements, documents and media, finance and receipts, notifications, voice notes, leadership dashboards, and operational reports.
 
-## Application Flow
+## Roles
+
+Members access personal and section information. Section Leaders coordinate voice sections. Secretaries manage records and communication. Music Leadership manages repertoire and rehearsal resources. Treasurers manage authorized financial records. Presidents and Administrators manage approvals, permissions, governance, and reporting.
+
+## Architecture
+
+The application uses a decoupled full-stack architecture: React, TypeScript, Vite, TanStack Router, Tailwind CSS, React Hook Form, Framer Motion, and reusable UI components on the frontend; Django and Django REST Framework on the backend. Django is responsible for authentication, database models, business rules, permissions, APIs, auditability, and secure server-side validation.
 
 `	ext
-Home -> Login -> Successful authentication -> Section Selection
-Home -> Sign Up -> Account creation -> Section Selection
+React + TypeScript + Vite -> Django REST API -> Database and secure services
 `
 
-## Local Development
+The frontend currently runs with local mock services while the Django backend is implemented and connected. Future integrations include Google OAuth, email delivery, secure file storage, calendar services, and reporting.
 
-From the frontend directory:
+## Security
 
-`ash
-npm install
-npm run dev -- --host 0.0.0.0 --port 8081
-`
+Production security requires protected sessions, CSRF protection, server-side authorization, role-based permissions, validation, rate limiting, secure file access, audit logging, protected environment variables, encrypted transport, and tested backup procedures. The frontend is never the authority for sensitive permissions or financial access.
 
-The application is available at http://localhost:8081/. Create a production build with 
-pm run build.
+## Development
+
+Frontend: cd frontend, 
+pm install, 
+pm run dev -- --host 0.0.0.0 --port 8081. Build with 
+pm run build. The local frontend is available at http://localhost:8081/.
+
+Django development will use a Python virtual environment, ackend/requirements.txt, migrations, environment variables, and python backend/manage.py runserver.
 
 ## Roadmap
 
-Future iterations may introduce real authentication, Google OAuth, secure sessions, member profiles, section permissions, attendance, rehearsals, repertoire, documents, announcements, finance, notifications, and leadership dashboards.
+The roadmap covers Django authentication, Google OAuth, persistent users and roles, member and section management, attendance, events, repertoire, documents, announcements, notifications, finance, leadership dashboards, automated tests, accessibility review, deployment, monitoring, and backups.
 
 ## Status
 
-This is an active frontend foundation, not a final production deployment. Authentication and Google sign-in are currently mock interactions. Production readiness requires backend integration, secure credential handling, authorization rules, automated tests, accessibility review, deployment configuration, and monitoring.
+AVC is an active full-stack foundation. Frontend authentication and Google sign-in are currently mock interactions; Django is the designated production backend.
 
 ## License
 
-This project is provided for the AVC choir administration initiative. Licensing and production distribution terms should be formalized before public redistribution.
+This project is developed for the AVC choir administration initiative. Licensing and production distribution terms should be formalized before public redistribution.

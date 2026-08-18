@@ -3,6 +3,7 @@ import type { HTMLAttributes } from "react";
 interface LogoProps extends HTMLAttributes<HTMLDivElement> {
   compact?: boolean;
   hideText?: boolean;
+  large?: boolean;
   invert?: boolean;
 }
 
@@ -10,6 +11,7 @@ export function Logo({
   className = "",
   compact = false,
   hideText = false,
+  large = false,
   invert = false,
   ...props
 }: LogoProps) {
@@ -22,7 +24,7 @@ export function Logo({
         src="/logo.jpeg"
         alt="AVC Logo"
         className={`shrink-0 rounded-full object-cover shadow-glow ${
-          hideText ? "h-8 w-8" : compact ? "h-10 w-10" : "h-12 w-12"
+          hideText ? (large ? "h-24 w-24" : "h-8 w-8") : compact ? "h-10 w-10" : "h-12 w-12"
         }`}
       />
       {!hideText && (

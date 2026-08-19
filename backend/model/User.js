@@ -6,31 +6,37 @@ const UserSchema = new Schema({
   first_name: {
     type: String,
     required: true,
-    unique: true
-    },
-    last_name: {
+    unique: true,
+  },
+  last_name: {
     type: String,
     required: true,
   },
   email: {
     type: String,
-    required: true,
-    unique: true
-    },
+    required: () => this.provider === "local",
+    unique: true,
+  },
   phone: {
     type: String,
-    required: true,
-    unique: true
-    },
+      unique: true,
+    sparse: true,
+    required: () => this.provider === "local",
+  },
   password: {
     type: String,
-    required: true
-    },
+    required: () => this.provider === "local",
+  },
   googleId: {
     type: String,
     unique: true,
-    sparse: true
-  }
+    sparse: true,
+  },
+  provider: {
+    type: String,
+    enum: ["local", "google"],
+    default: "local",
+  },
 });
 
 // Hash the password before saving the user

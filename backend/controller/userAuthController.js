@@ -2,7 +2,7 @@ const User = require('../model/User');
 const jwt = require('jsonwebtoken');    
 
 const token = createToken = (user) => {
-  return jwt.sign({ id: user._id, first_name: user.first_name, last_name: user.last_name }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  return jwt.sign({ id: user._id, first_name: user.first_name, last_name: user.last_name,provider:user.provider }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
 exports.registerUser = async (req, res) => {
@@ -39,12 +39,34 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.googleCallback = (req, res) => {
+    console.log("Google callback triggered",req.user);
     try {
         const token = createToken(req.user);
     // Successful authentication, user information is available in req.user
-        res.json({ user: req.user, token });
-    // res.redirect("/dashboard"); // Redirect to a dashboard or home page after successful login
+        const viewUser = { user: req.user, token };
+        console.log("Generated token:", token);
+        res.redirect(`http://localhost:8080/dashboard?token=${ token }`);
+    console.log(`welcome ${req.user.first_name}!`);    // Redirect to a dashboard or home page after successful login
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ error: 'Invalid email or password' });
+        }
+
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Invalid email or password' });
+        }
+        const token = createToken(user);
+        res.json({ user, token });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
